@@ -1,5 +1,21 @@
-export default function SnipperShowPage(props: any) {
-  console.log(props);
+import { notFound } from "../../../../node_modules/next/navigation";
+import { db } from "@/db";
 
-  return <div>Show a snippet!</div>;
+interface SnippetShowPageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default async function SnipperShowPage(props: SnippetShowPageProps) {
+  const snippet = await db.snippet.findFirst({
+    where: {
+      id: parseInt(props.params.id),
+    },
+  });
+
+  if (!snippet) {
+    return notFound();
+  }
+  return <div>{snippet.title}</div>;
 }
