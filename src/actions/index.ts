@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { db } from "@/db";
+import { revalidatePath } from "../../node_modules/next/cache";
 
 export async function editSnippet(id: number, code: string) {
   await db.snippet.update({
@@ -17,6 +18,7 @@ export async function deleteSnippet(id: number) {
     where: { id },
   });
 
+  revalidatePath("/");
   redirect("/");
 }
 export async function createSnippet(
@@ -56,5 +58,6 @@ export async function createSnippet(
       };
     }
   }
+  revalidatePath("/");
   redirect("/");
 }

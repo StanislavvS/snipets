@@ -26,7 +26,7 @@ export default function SnippetEditForm({ snippet }: SnippetEditFormProps) {
         language="javascript"
         defaultValue={snippet.code}
         onChange={handleEditorChange}
-        options={{ minmap: { enabled: false } }}
+        options={{ minimap: { enabled: false } }}
       />
       <form action={editSnippetAction}>
         <button type="submit" className="p-2 border rounded">
